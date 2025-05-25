@@ -64,6 +64,17 @@ namespace LoanApplicationSystem.Controllers
 
 
 
+@{
+    var statusClass = item.Status == ApplicationStatus.Approved ? "bg-success text-white"
+                    : item.Status == ApplicationStatus.Rejected ? "bg-danger text-white"
+                    : "bg-warning text-dark";
+}
+<td><span class="badge @statusClass">@item.Status</span></td>
+
+
+
+
+
 
 
 
