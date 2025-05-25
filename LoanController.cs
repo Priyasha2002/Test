@@ -75,6 +75,24 @@ namespace LoanApplicationSystem.Controllers
 
 
 
+<script>
+    document.getElementById("searchInput").addEventListener("input", function () {
+        var filter = this.value.toLowerCase();
+        var rows = document.querySelectorAll("#loanTable tbody tr");
+
+        rows.forEach(row => {
+            var company = row.cells[1].textContent.toLowerCase();
+            var industry = row.cells[3].textContent.toLowerCase();
+            row.style.display = (company.includes(filter) || industry.includes(filter)) ? "" : "none";
+        });
+    });
+</script>
+
+
+
+
+
+
 
 
 
