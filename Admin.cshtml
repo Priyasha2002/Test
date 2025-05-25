@@ -1,0 +1,52 @@
+@model IEnumerable<LoanApplicationSystem.Models.LoanApplication>
+
+@{
+    ViewBag.Title = "Admin - All Applications";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">All Loan Applications</h2>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Loan Type</th>
+                <th>Amount (INR)</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.BusinessName</td>
+                    <td>@item.LoanPurpose</td>
+                    <td>@item.LoanAmount.ToString("C0")</td>
+                    <td>@item.SubmissionDAte.ToShortDateString()</td>
+                    <td>@item.Status</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateStatus", "Loan", FormMethod.Post))
+                        {
+                            @Html.Hidden("ApplicationId", item.Id)
+                            <select name="Status" class="form-control">
+                                @foreach (var status in Enum.GetValues(typeof(LoanApplicationSystem.Models.ApplicationStatus)))
+                                {
+                                    <option value="@status" @(item.Status == (LoanApplicationSystem.Models.ApplicationStatus)status ? "selected" : "")>
+                                        @status
+                                    </option>
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary mt-2">Update</button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
