@@ -8,24 +8,25 @@ namespace LoanApplicationSystem.Models
         Pending,
         Approved,
         Rejected
-
     }
+
     public class LoanApplication
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
-        public string FullName { get; set; }
+        public string CompanyName { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public string BusinessType { get; set; }
 
-        [Required]
-        public string Phone { get; set; }
+        public string RegistrationNo { get; set; }
 
-        [Required]
-        public string BusinessName { get; set; }
+        public string GSTIN { get; set; }
+
+        public string Industry { get; set; }
+
+        public int YearsInOperation { get; set; }
 
         [Required]
         public decimal LoanAmount { get; set; }
@@ -33,15 +34,18 @@ namespace LoanApplicationSystem.Models
         [Required]
         public string LoanPurpose { get; set; }
 
-        [Required]
-        public decimal AnnualRevenue { get; set; }
+        public decimal Turnover { get; set; }
 
-        [Required]
+        public decimal NetProfit { get; set; }
+
         public decimal ExistingDebt { get; set; }
+
+        public string Collateral { get; set; }
 
         public string UploadedFileName { get; set; }
 
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Pending;
-        public DateTime SubmissionDAte { get; set; } = DateTime.Now;
+
+        public DateTime SubmissionDate { get; set; } = DateTime.Now;
     }
 }
