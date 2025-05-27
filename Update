@@ -1,0 +1,30 @@
+<select name="Status" class="form-select form-select-sm">
+    <option value="Pending" @(item.Status == ApplicationStatus.Pending ? "selected" : "")>⏳ Pending</option>
+    <option value="Approved" @(item.Status == ApplicationStatus.Approved ? "selected" : "")>✅ Approved</option>
+    <option value="Rejected" @(item.Status == ApplicationStatus.Rejected ? "selected" : "")>❌ Rejected</option>
+</select>
+
+
+
+
+<tr class="@(item.Status == ApplicationStatus.Approved ? "table-success" :
+              item.Status == ApplicationStatus.Rejected ? "table-danger" :
+              "table-warning")">
+
+
+
+
+<td>
+    @if (item.Status == LoanApplicationSystem.Models.ApplicationStatus.Approved)
+    {
+        <span class="text-success fw-bold">✅ Approved</span>
+    }
+    else if (item.Status == LoanApplicationSystem.Models.ApplicationStatus.Rejected)
+    {
+        <span class="text-danger fw-bold">❌ Rejected</span>
+    }
+    else
+    {
+        <span class="text-warning fw-bold">⏳ Pending</span>
+    }
+</td>
