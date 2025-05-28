@@ -28,3 +28,49 @@
         <span class="text-warning fw-bold">⏳ Pending</span>
     }
 </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[HttpPost]
+public ActionResult DeleteApproval(int id, int applicationId)
+{
+    var approval = db.Approvals.FirstOrDefault(a => a.ApprovalId == id);
+    if (approval != null)
+    {
+        db.Approvals.Remove(approval);
+        db.SaveChanges();
+        TempData["Message"] = "Approval entry deleted.";
+    }
+
+    return RedirectToAction("Details", new { applicationId });
+}
+
+
+
+
+<td>
+    @using (Html.BeginForm("DeleteApproval", "Approval", FormMethod.Post, new { onsubmit = "return confirm('Are you sure?');" }))
+    {
+        @Html.Hidden("id", item.ApprovalId)
+        @Html.Hidden("applicationId", item.ApplicationId)
+        <button type="submit" class="btn btn-sm btn-danger">🗑 Delete</button>
+    }
+</td>
+
